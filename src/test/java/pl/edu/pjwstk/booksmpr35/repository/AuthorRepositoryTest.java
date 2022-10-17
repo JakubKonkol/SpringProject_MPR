@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import pl.edu.pjwstk.booksmpr35.model.Author;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,19 +34,51 @@ class AuthorRepositoryTest {
     }
 
     @Test
-    void getAllAuthors() {
+    void Should_ReturnAllAuthorsWithCorrectInput() {
+        //given
+        List<Author> authors;
+        //when
+        authors = authorRepository.getAllAuthors();
+        //then
+        assertNotNull(authors);
     }
 
     @Test
-    void getAuthorById() {
+    void Should_ReturnAuthorByIdWithCorrectInput() {
+        //given
+        Author a = authorRepository.createAuthor(new Author());
+        //when
+        Author b = authorRepository.getAuthorById(a.getId());
+        //then
+        assertNotNull(b);
+        assertNotNull(b.getId());
     }
 
     @Test
-    void updateAuthor() {
+    void Should_ThrowIllegalArgumentExceptionWhenGettingAuthorWithWrongId(){
+        //given
+
+        //when
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> authorRepository.getAuthorById(8L));
+
+
+
     }
 
     @Test
-    void deleteAuthorById() {
+    void Should_DeleteAutorByIdWithCorrectInput() {
+        //given
+        Author a = authorRepository.createAuthor(new Author());
+        //when
+        authorRepository.deleteAuthorById(a.getId());
+        //then
+        assertEquals(0, authorRepository.getAllAuthors().size());
+    }
+    @Test
+    void Should_ThrowIllegalArgumentExceptionWhenAuthorNotExistDuringDelete(){
+        assertThrows(IllegalArgumentException.class, ()-> authorRepository.deleteAuthorById(999L));
     }
 
 }

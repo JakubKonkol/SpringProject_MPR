@@ -2,6 +2,7 @@ package pl.edu.pjwstk.booksmpr35.repository;
 
 import pl.edu.pjwstk.booksmpr35.model.Author;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,12 +28,16 @@ public class AuthorRepository {
 
     public List<Author> getAllAuthors(){
         //todo
-        return null;
+
+        return new ArrayList<>(authorHashMap.values());
     }
 
     public Author getAuthorById(Long id){
         //todo
-        return null;
+        if(authorHashMap.containsKey(id)){
+            return authorHashMap.get(id);
+        }
+        throw new IllegalArgumentException();
     }
 
     public Author updateAuthor(Long id, Author author){
@@ -42,5 +47,9 @@ public class AuthorRepository {
 
     public void deleteAuthorById(Long id){
         //todo
+        if(authorHashMap.containsKey(id)){
+            authorHashMap.remove(id);
+        }
+        throw new IllegalArgumentException();
     }
 }
