@@ -1,11 +1,12 @@
 package pl.edu.pjwstk.booksmpr35.repository;
 
+import org.springframework.stereotype.Repository;
 import pl.edu.pjwstk.booksmpr35.model.Author;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+@Repository
 public class AuthorRepository {
 
     HashMap<Long, Author> authorHashMap = new HashMap<>();
@@ -17,13 +18,14 @@ public class AuthorRepository {
     }
 
     private Long findMaxId() {
-        if(authorHashMap.size() == 0) {
+        if(authorHashMap.size() == 0)
+        {
             return 0L;
         }
         return authorHashMap.keySet().stream()
                 .mapToLong(a-> a)
                 .max()
-                .getAsLong();
+                .getAsLong() + 1;
     }
 
     public List<Author> getAllAuthors(){
