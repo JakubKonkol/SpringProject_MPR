@@ -20,16 +20,16 @@ public class AuthorService {
     }
 
     public Author createAuthor(Author author) {
-        return authorRepository.createAuthor(author);
+        return authorRepository.save(author);
     }
     public List<Author> getAllAuthors(){
-        return authorRepository.getAllAuthors();
+        return authorRepository.findAll();
     }
     public Author getAuthorById(Long id){
-        return authorRepository.getAuthorById(id);
+        return authorRepository.getReferenceById(id);
     }
     public void deleteAuthorById(Long id){
-        authorRepository.deleteAuthorById(id);
+        authorRepository.deleteById(id);
     }
 
 }
