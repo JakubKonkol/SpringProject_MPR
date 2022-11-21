@@ -17,19 +17,23 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
     public Book createBook(Book book){
-        return bookRepository.createBook(book);
+        return bookRepository.save(book);
     }
     public List<Book> getAllBooks(){
-        return bookRepository.getAllBooks();
+        return bookRepository.findAll();
     }
     public void updateBook(Long id, Book book){
-        bookRepository.updateBook(id, book);
+        Book bookToUpdate = bookRepository.getReferenceById(id);
+        bookToUpdate.setTitle(book.getTitle());
+        bookToUpdate.setAuthor(book.getAuthor());
+        bookToUpdate.setPublisher(book.getPublisher());
+        bookRepository.save(bookToUpdate);
     }
     public Book getBookById(Long id){
-        return bookRepository.getBookById(id);
+        return bookRepository.getReferenceById(id);
     }
     public void deleteBook(Long id){
-        bookRepository.deleteBook(id);
+        bookRepository.deleteById(id);
     }
 
 }

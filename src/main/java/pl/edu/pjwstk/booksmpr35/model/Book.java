@@ -2,12 +2,19 @@ package pl.edu.pjwstk.booksmpr35.model;
 
 import pl.edu.pjwstk.booksmpr35.model.enums.BookType;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "book")
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @OneToOne
+    @JoinColumn(name ="author_id")
     private Author author;
+    @Enumerated(EnumType.STRING)
     private BookType bookType;
     private LocalDate publishedDate;
     private String publisher;
