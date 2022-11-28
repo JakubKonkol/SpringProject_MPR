@@ -7,6 +7,7 @@ import pl.edu.pjwstk.booksmpr35.model.enums.BookType;
 import pl.edu.pjwstk.booksmpr35.repository.BookRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -42,8 +43,13 @@ public class BookService {
 
     }
     public Book getBookById(Long id){
-        return bookRepository.getReferenceById(id);
+        Optional<Book> b = bookRepository.findById(id);
+        if (b.isPresent()) {
+            return b.get();
+        }
+        throw new IllegalArgumentException();
     }
+
     public void deleteBook(Long id){
         bookRepository.deleteById(id);
     }

@@ -8,6 +8,7 @@ import pl.edu.pjwstk.booksmpr35.repository.AuthorRepository;
 import pl.edu.pjwstk.booksmpr35.repository.BookRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorService {
@@ -25,6 +26,14 @@ public class AuthorService {
     public List<Author> getAllAuthors(){
         return authorRepository.findAll();
     }
+    public Author findByNameAndLastName(String firstName, String lastName){
+        Optional<Author> author = authorRepository.findAuthorByFirstNameAndLastName(firstName, lastName);
+        if(author.isPresent()){
+            return author.get();
+        }
+        throw new IllegalArgumentException();
+    }
+
     public Author getAuthorById(Long id){
         return authorRepository.getReferenceById(id);
     }

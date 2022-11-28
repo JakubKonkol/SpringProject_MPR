@@ -9,6 +9,7 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "firstname")
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
@@ -16,10 +17,10 @@ public class Author {
     public Author() {
     }
 
-    public Author(String firstName, String lastName, LocalDate dateOfBirth) {
+    public Author(Long id, String firstName, String lastName) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
     }
 
     public void setId(Long id) {

@@ -11,8 +11,8 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @OneToOne
-    @JoinColumn(name ="author_id")
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
     private Author author;
     @Enumerated(EnumType.STRING)
     private BookType bookType;
@@ -21,6 +21,13 @@ public class Book {
 
     public Book() {
     }
+    public Book(String title, LocalDate publishDate, BookType bookType, Author author) {
+        this.title = title;
+        this.publishedDate = publishDate;
+        this.bookType = bookType;
+        this.author = author;
+    }
+
 
     public void setTitle(String title) {
         this.title = title;
